@@ -62,7 +62,7 @@
         const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
-        if(prediction[0].probability.toFixed(2) >= 1.00){
+        if(prediction[0].probability.toFixed(2) == 1.00){
             status = "squat"
         }
         else if(prediction[1].probability.toFixed(2) >= 0.90){
@@ -73,7 +73,7 @@
             }
             status = "stand"
         }
-        else if(prediction[2].probability.toFixed(2) >= 0.90){
+        else if(prediction[2].probability.toFixed(2) == 1.00){
             if(status == "squat" || status == "stand"){
                 var audio = new Audio('again.mp3'); // voice says "aren't you going to focus?!" in Korean
                 audio.play();
